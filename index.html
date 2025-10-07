@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World Animado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hello-world {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.4);
+            animation: bounce 2s ease-in-out infinite, colorChange 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-30px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-15px) scale(1.05);
+            }
+        }
+
+        @keyframes colorChange {
+            0% { color: #fff; }
+            25% { color: #ff6b6b; }
+            50% { color: #4ecdc4; }
+            75% { color: #feca57; }
+            100% { color: #fff; }
+        }
+
+        .hello-world:hover {
+            animation-play-state: paused;
+            transform: scale(1.2) rotate(5deg);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hello-world {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hello-world {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hello-world">Hello World!</div>
+
+    <script>
+        console.log('👋 Hello World animado carregado!');
+        
+        // Adicionar interatividade extra
+        document.addEventListener('click', () => {
+            const helloWorld = document.querySelector('.hello-world');
+            helloWorld.style.animation = 'bounce 0.5s ease-in-out, colorChange 0.5s ease-in-out';
+            
+            setTimeout(() => {
+                helloWorld.style.animation = 'bounce 2s ease-in-out infinite, colorChange 3s ease-in-out infinite';
+            }, 500);
+        });
+
+        // Alterar texto dinamicamente
+        const messages = ['Hello World!', 'Olá Mundo!', 'Hola Mundo!', 'Bonjour Monde!', 'Hallo Welt!'];
+        let currentIndex = 0;
+
+        setInterval(() => {
+            const helloWorld = document.querySelector('.hello-world');
+            currentIndex = (currentIndex + 1) % messages.length;
+            helloWorld.textContent = messages[currentIndex];
+        }, 3000);
+    </script>
+</body>
+</html>
